@@ -29,7 +29,7 @@ Wildchat 工作原理简单，前提是在你的应用程序正确的依赖它�
 {% endhighlight %}
 
 使用上面的网址可以下载两个压缩的和非压缩版本的 Wildchat 的 JavaScript 和 CSS 文件。您也可以从
-[Wildchat GitHub repository](https://github.com/WildDogTeam/wildchat/releases)发布页下载。
+[Wildchat GitHub repository](https://github.com/WildDogTeam/demo-js-wildchat/releases)发布页下载。
 [Wilddog](https://z.wilddog.com/web/quickstart) and
 [jQuery](https://code.jquery.com/) 可以直接从他们各自的网站上下载。
 
@@ -178,7 +178,7 @@ Next, create a primary JavaScript interface for your UI using the name `wildchat
 
 Lastly, begin hooking into the Wildchat API, detailed below, using the exposed methods and defined bindings.
 
-<div class="emphasis-box">Missing something? Send us a <a href="https://github.com/WildDogTeam/wildchat/pulls" target="_blank">pull request</a> and contribute to the repository!</div>
+<div class="emphasis-box">Missing something? Send us a <a href="https://github.com/WildDogTeam/demo-js-wildchat/pulls" target="_blank">pull request</a> and contribute to the repository!</div>
 
 
 <a name="api"> </a>

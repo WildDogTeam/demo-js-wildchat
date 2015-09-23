@@ -6,10 +6,10 @@
   "homepage": "https://wildchat.wilddogapp.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WildDogTeam/wildchat.git"
+    "url": "https://github.com/WildDogTeam/demo-js-wildchat.git"
   },
   "bugs": {
-    "url": "https://github.com/WildDogTeam/wildchat/issues"
+    "url": "https://github.com/WildDogTeam/demo-js-wildchat/issues"
   },
   "licenses": [
     {
