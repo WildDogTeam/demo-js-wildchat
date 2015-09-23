@@ -1,0 +1,14 @@
+# Mac OS-X
+.DS_Store
+
+# Node / NPM
+node_modules/
+
+# Bower
+bower_components/
+
+# Distribution files
+dist/
+
+# Jekyll
+_site/

@@ -1,0 +1,56 @@
+<div id='<%- id %>' data-room-id='<%- id %>' class='tab-pane'>
+  <div class='tab-pane-menu clearfix'>
+
+    <div class='wildchat-dropdown twofifth'>
+      <a data-event='wildchat-user-room-list-btn' class='full btn wildchat-dropdown-toggle' data-toggle="wildchat-dropdown" href='#' data-target='wildchat-room-user-list-<%- id %>'>
+        <span class='icon user-group'></span>
+        In Room
+        <span class='caret'></span>
+      </a>
+      <div class='wildchat-dropdown-menu' role='menu'>
+        <ul id='wildchat-room-user-list-<%- id %>' class='full'></ul>
+      </div>
+    </div>
+
+    <div class='wildchat-dropdown twofifth'>
+      <a data-event='wildchat-user-search-btn' class='full btn wildchat-dropdown-toggle' data-toggle="wildchat-dropdown" href='#'>
+        <span class='icon plus'>+</span>
+        Invite
+        <span class='caret'></span>
+      </a>
+
+      <div class='wildchat-dropdown-menu' role='menu'>
+        <div class='wildchat-dropdown-header aligncenter clearfix'>
+          <div class='search-wrapper'>
+            <span class='icon search'></span>
+            <input type='text' data-event='wildchat-user-search' data-template='templates/room-user-search-list-item.html' data-target='wildchat-room-user-search-<%- id %>' data-controls='wildchat-room-user-search-controls-<%- id %>' class='center fivesixth'>
+          </div>
+        </div>
+        <ul id='wildchat-room-user-search-<%- id %>'></ul>
+
+        <div class='wildchat-dropdown-footer aligncenter clearfix'>
+          <div id='wildchat-room-user-search-controls-<%- id %>' class='clearfix'>
+
+            <span class="quarter"></span>
+            <!--
+            <button type='button' class='btn third disabled' data-event='wildchat-user-search' data-template='templates/room-user-search-list-item.html' data-target='wildchat-room-user-search-<%- id %>' data-controls='wildchat-room-user-search-controls-<%- id %>' data-toggle='wildchat-pagination-prev' disabled=disabled>Prev</button>
+            -->
+            <button type='button' class='btn half disabled' data-event='wildchat-user-search' data-template='templates/room-user-search-list-item.html' data-target='wildchat-room-user-search-<%- id %>' data-controls='wildchat-room-user-search-controls-<%- id %>' data-toggle='wildchat-pagination-next'  disabled=disabled>Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href='#!' data-event='wildchat-close-tab' class='icon close right' style='15px 5px' title='Leave Room'></a>
+
+  </div>
+
+  <div class='clearfix'>
+    <div id='wildchat-messages<%- id %>' class='chat'></div>
+  </div>
+
+  <div class='clearfix'>
+    <label>Your message:</label>
+    <textarea id='textarea<%- id %>' placeholder='Type your message here...'></textarea>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div id='wildchat' class='full'>
+  <div id='wildchat-header' class='clearfix'>
+    <div class='clearfix'>
+
+      <div class='half wildchat-dropdown' style=''>
+        <a id='wildchat-btn-rooms' class='wildchat-dropdown-toggle btn full' data-toggle="wildchat-dropdown" href='#'>
+          <span class='icon user-chat'></span>
+          Chat Rooms
+          <span class='caret'></span>
+        </a>
+        <div class='wildchat-dropdown-menu full' role='menu'>
+
+          <ul id='wildchat-room-list'></ul>
+
+          <div class='wildchat-dropdown-footer aligncenter'>
+            <button type='button' class='btn twothird center' id='wildchat-btn-create-room-prompt'>Create Room</button>
+          </div>
+
+        </div>
+
+      </div>
+      <div class='half wildchat-dropdown' style=''>
+        <a data-event='wildchat-user-search-btn' class='btn full wildchat-dropdown-toggle' data-toggle="wildchat-dropdown" href='#'>
+          <span class='icon user-group'></span>
+          Visitors
+          <span class='caret'></span>
+        </a>
+        <div class='wildchat-dropdown-menu' role='menu'>
+          <div class='wildchat-dropdown-header aligncenter clearfix'>
+            <div class='search-wrapper'>
+              <span class='icon search'></span>
+              <input type='text' data-event='wildchat-user-search' data-template='templates/user-search-list-item.html' data-target='wildchat-user-search' data-controls='wildchat-user-search-controls' class='center fivesixth'>
+            </div>
+          </div>
+          <ul id='wildchat-user-search'></ul>
+
+          <div class='wildchat-dropdown-footer aligncenter clearfix'>
+            <div id='wildchat-user-search-controls' class='clearfix'>
+              <span class="quarter"></span>
+              <button type='button' class='btn half' data-event='wildchat-user-search' data-toggle='wildchat-pagination-next' data-template='templates/user-search-list-item.html' data-target='wildchat-user-search' data-controls='wildchat-user-search-controls' disabled=disabled>Next</button>
+            </div>
+
+            <label class='center full'>
+              <small>Use "+ Invite" button within chat rooms for regular invites.</small>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id='wildchat-tabs' class='clearfix'>
+    <ul id='wildchat-tab-list' class='nav nav-tabs clearfix'></ul>
+    <div id='wildchat-tab-content' class='tab-content'></div>
+  </div>
+
+  <div id='wildchat-footer' class='clearfix'></div>
+</div>

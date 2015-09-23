@@ -1,0 +1,10 @@
+
+{
+  "wilddog": "wildchat",
+  "public": ".",
+  "ignore": [
+    "wilddog.json",
+    ".*",
+    "**/node_modules/**"
+  ]
+}

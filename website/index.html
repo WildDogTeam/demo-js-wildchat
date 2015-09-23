@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Wildchat - Wilddog 开源实时聊天应用</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wilddog Wildchat 文档">
+  <meta name="description" content="开源, 基于 Wilddog 的 chat" />
+
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="./css/pygments-borland.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link href="images/favicon.ico" rel="shortcut icon" />
+</head>
+
+<body class="home-page">
+  <a href="https://github.com/WildDogTeam/wildchat" target="_blank">
+    <img class="fork-on-github" src="images/fork-on-github-white.png" alt="Fork me on GitHub">
+  </a>
+
+  <header id="top-content">
+    <div class="header-title">
+      <div id="top-shadow"></div>
+      <div class="container text-center">
+        <div class="header-links" class="text-right">
+          <a href="#" class="selected">主页</a>
+          <a href="./docs/">文档</a>
+        </div>
+        <div id="home-title"><span class="strong">Wild</span><span class="satisfy">chat</span></div>
+        <div id="home-subtitle">Wilddog 开源实时聊天应用</div>
+      </div>
+    </div>
+
+    <div class="header-content">
+      <div class="container text-center">
+        <div class="row">
+          <div class="span12">
+            <a href="https://github.com/WildDogTeam/wildchat" target="_blank">
+              <button id="home-download-on-github" class="btn btn-large" type="button"><span class="satisfy">Download on GitHub</span></button>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span6 offset3">
+            <div id="wildchat-container" class="clearfix"></div>
+            <div id="user-info">
+              Logged in as <span id="user-name">.</span>
+              <a href="javascript:logout();">Logout</a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </header>
+
+
+  <div class="container" id="bottom-container">
+    <div class="row">
+      <div class="span12">
+        <div class="social-container clearfix">
+          <ul class="social-buttons">
+            <li>
+              <iframe class="github-btn" src="https://mdo.github.io/github-buttons/github-btn.html?user=WildDogTeam&repo=wildchat&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+            </li>
+            <li>
+              <iframe class="github-btn" src="https://mdo.github.io/github-buttons/github-btn.html?user=WildDogTeam&repo=wildchat&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span12">
+          <div class="bottom-title">无后端实时聊天</div>
+          <div class="bottom-content">
+            <div class="row">
+              <div class="span5 offset1">
+                <h3>Wildchat是什么?</h3>
+                <p class="answer">
+                  Wildchat是使用Wilddog一个开源的、实时的聊天应用。它提供完全多用户，多房间，用户搜索，站内短信，聊天邀请等等。
+                </p>
+              </div>
+              <div class="span5">
+                <h3>Wildchat使用技术实现?</h3>
+                <p class="answer">
+                  Wildchat 使用 <a href="https://www.wilddog.com/" target="_blank">Wilddog</a> 保持数据同步和持久化。
+                  <br/><br/>
+                  默认的界面使用<a href="http://jquery.com/" target="_blank">jQuery</a>， <a href="http://underscorejs.org/" target="_blank">Underscore.js</a>和<a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a>。Icons使用<a href="http://glyphicons.com/" target="_blank">Glyphicons</a>。构建和编译使用<a href="http://gruntjs.com/" target="_blank">Grunt</a>，托管在<a href="https://github.com/" target="_blank">GitHub</a>。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>
+        <div id="footer-links">
+          <a href="docs/">Docs</a>
+          <a href="https://github.com/WildDogTeam/wildchat" target="_blank">GitHub Project</a>
+          <a href="https://github.com/WildDogTeam/wildchat/issues" target="_blank">Issues</a>
+        </div>
+      </p>
+    </div>
+  </footer>
+
+  <div id="auth-modal" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h4 id="myModalLabel">用户登录</h4>
+    </div>
+    <div class="modal-body text-center">
+      <p>
+        <a id="twitter-signin" href="javascript:login('weibo');">
+          <img id="twitter-signin-btn" src="http://www.sinaimg.cn/blog/developer/wiki/32.png">
+        </a>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">取消</button>
+    </div>
+  </div>
+
+  <!-- Wildchat -->
+  <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="libs/twitter-bootstrap/2.3.1/js/bootstrap-modal.min.js"></script>
+
+  <!-- Download from https://github.com/WildDogTeam/wildchat -->
+  <link rel="stylesheet" href="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css" />
+  <script src="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js"></script>
+  <script>
+    var chatRef = new Wilddog('https://wildchat-demo.wilddogio.com'),
+        target = document.getElementById("wildchat-container"),
+        authModal = $('#auth-modal').modal({ show: false }),
+        chat = new WildchatUI(chatRef, target);
+
+    chat.on('auth-required', function() {
+      authModal.modal('show');
+      return false;
+    });
+
+    chatRef.onAuth(function(authData) {
+      if (authData) {
+        var userId = authData.uid,
+            username = authData[authData.provider].username;
+
+        chat.setUser(userId, username);
+        $('#user-name').text(username);
+        $('#user-info').show();
+        setTimeout(function() {
+          chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
+        }, 500);
+      } else {
+        $('#user-info').hide();
+        chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
+      }
+    });
+
+    function login(provider) {
+      authModal.modal('hide');
+      chatRef.authWithOAuthPopup(provider, function(error, authData) {
+        if (error) {
+          console.log(error);
+        }
+      });
+    }
+
+    function logout() {
+      chatRef.unauth();
+      location.reload();
+    }
+  </script>
+
+  <div id="fb-root"></div>
+</body>
+</html>

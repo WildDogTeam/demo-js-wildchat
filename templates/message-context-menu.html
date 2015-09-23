@@ -1,0 +1,11 @@
+<div data-toggle='wildchat-contextmenu' class='contextmenu' data-message-id='<%- id %>'>
+  <ul>
+    <li><a href='#!' data-event='wildchat-user-warn'>Warn User</a></li>
+    <% if (allowKick) { %>
+      <li><a href='#!' data-event='wildchat-user-kick'>Kick User</a></li>
+    <% } %>
+    <li><a href='#!' data-event='wildchat-user-suspend-hour'>Suspend User (1 Hour)</a></li>
+    <li><a href='#!' data-event='wildchat-user-suspend-day'>Suspend User (1 Day)</a></li>
+    <li><a href='#!' data-event='wildchat-message-delete'>Delete Message</a></li>
+  </ul>
+</div>
