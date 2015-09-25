@@ -1,9 +1,4 @@
-# Firechat.js
+# Wildchat.js
 
-[![Version](https://badge.fury.io/gh/firebase%2Ffirechat.svg)](http://badge.fury.io/gh/firebase%2Ffirechat)
+Wildchat是使用Wilddog一个开源的、实时的聊天应用。它提供完全多用户，多房间，用户搜索，站内短信，聊天邀请等等。
 
-Firechat is a simple, extensible chat widget powered by [Firebase](https://www.firebase.com/?utm_source=firechat).
-It is intended to serve as a concise, documented foundation for chat products built on Firebase.
-It works out of the box, and is easily extended.
-
-For demos, documentation, and integration instructions, see the [Firechat documentation](https://firechat.firebaseapp.com).

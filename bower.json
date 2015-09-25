@@ -1,25 +1,25 @@
 {
-  "name": "firechat",
-  "description": "Realtime open source chat client powered by Firebase",
-  "version": "0.0.0",
+  "name": "wildchat",
+  "description": "Realtime open source chat client powered by Wilddog",
+  "version": "0.5.0",
   "authors": [
-    "Firebase <support@firebase.com> (https://www.firebase.com/)"
+    "Wilddog <support@wilddog.com> (https://www.wilddog.com/)"
   ],
-  "homepage": "https://firechat.firebaseapp.com/",
+  "homepage": "https://wildchat.wilddogapp.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/firebase/firechat.git"
+    "url": "https://github.com/WildDogTeam/demo-js-wildchat.git"
   },
   "license": "MIT",
   "keywords": [
     "chat",
     "talk",
-    "firebase",
+    "wilddog",
     "realtime",
     "websocket",
     "synchronization"
   ],
-  "main": "dist/firechat.js",
+  "main": "dist/wildchat.js",
   "ignore": [
     "**/.*",
     "src",
@@ -31,6 +31,6 @@
     "changelog.txt"
   ],
   "dependencies": {
-    "firebase": "2.0.x"
+    "wilddog": "0.4.5"
   }
 }
