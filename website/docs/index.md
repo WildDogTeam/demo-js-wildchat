@@ -286,7 +286,7 @@ To bind events to Wildchat, invoke the public `on` method using an event ID and 
 <a name="data_structure"> </a>
 ### 数据结构
 
-Wildchat uses [Wilddog](https://www.firebase.com/?utm_source=docs&utm_medium=site&utm_campaign=firechat) for its data storage and synchronization. This means (a) you don't need to run any server code and (b) you get access to all the the Wilddog features, including first-class data security, automatic scaling, and data portability.
+Wildchat uses [Wilddog](https://www.wilddog.com/) for its data storage and synchronization. This means (a) you don't need to run any server code and (b) you get access to all the the Wilddog features, including first-class data security, automatic scaling, and data portability.
 
 You own all of the data and can interact with it in a variety of ways. Wildchat stores your data at the Wilddog location you specify using the
 following data structure:
@@ -323,6 +323,5 @@ You may find it useful to interact directly with the Wilddog data when building 
 <!--
 ### Security 安全
 To lock down your Wildchat data, you can use Wilddog's builtin
-[Security features](https://www.firebase.com/docs/security-quickstart.html?utm_source=docs&utm_medium=site&utm_campaign=firechat).  For some example
-security rules for Wildchat, see these [example rules on Github](https://github.com/firebase/firechat/tree/master/rules.json).
+security rules for Wildchat, see these [example rules on Github](https://github.com/WildDogTeam/demo-js-wildchat/tree/master/rules.json).
 -->
