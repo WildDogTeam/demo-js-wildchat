@@ -1,6 +1,6 @@
 {
   "name": "wildchat",
-  "description": "Realtime open source chat client powered by Wilddog",
+  "description": "Wilddog 实时开源聊天客户端",
   "version": "0.5.0",
   "authors": [
     "Wilddog <support@wilddog.com> (https://www.wilddog.com/)"
