@@ -8,7 +8,7 @@ Wildchat 是使用 [Wilddog](https://www.wilddog.com/) 一个开源的、实时�
 
 [![ 在 Wildchat 演示聊天截图](screenshot.png)](http://wildchat.wilddogapp.com/)
 
-**在线文档**
+## 在线文档
 
 [![ 在 Wildchat 在线文档](docs.png)](http://wildchat.wilddogapp.com/docs/)
 
