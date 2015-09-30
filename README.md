@@ -8,7 +8,7 @@ Wildchat 是使用 [Wilddog](https://www.wilddog.com/) 一个开源的、实时�
 
 [![ 在 Wildchat 演示聊天截图](screenshot.png)](http://wildchat.wilddogapp.com/)
 
-在线文档
+**在线文档**
 
 [![ 在 Wildchat 在线文档](docs.png)](http://wildchat.wilddogapp.com/docs/)
 
@@ -23,6 +23,7 @@ cd  demo-js-wildchat
 安装依赖：
 
 ```
+npm install bower -g
 npm install
 bower install
 ```
@@ -87,7 +88,7 @@ Wildchat 工作原理简单，前提是在你的应用程序正确的依赖它�
 <script src='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js'></script>
 ```
 
-使用上面提到的URL可以从Wilddog的CDN上下载到Wildchat的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog可以在各自的官网上下载。
+使用上面提到的URL可以从Wilddog的CDN上下载到Wildchat的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog可以在官网上下载。
 
 
 你也可以通过npm 或者 bowr安装Wildchat, 他们会自动下载依赖。
