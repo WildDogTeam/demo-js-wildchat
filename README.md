@@ -41,7 +41,7 @@ dist/
 ├── wildchat.min.css
 └── wildchat.min.js
 
-查看本地文档：
+查看本地文档(jekyll参考相关文档)：
 
 ```
 cd website/
@@ -151,9 +151,8 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 * [JavaScript SDK API](https://z.wilddog.com/web/api)
 * [下载页面](https://www.wilddog.com/download/)
 * [Wilddog FAQ](https://z.wilddog.com/faq/qa)
-
-* [jekyll](https://jekyllrb.com/)
-* [jekyll installation](http://jekyllrb.com/docs/installation/)
+* [jekyll 中文](http://jekyll.bootcss.com/docs/home/) 将纯文本转化为静态网站和博客
+* [jekyll 中文安装文档](http://jekyll.bootcss.com/docs/installation/)
 
 ## License
 MIT
