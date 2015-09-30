@@ -35,11 +35,13 @@ grunt
 
 生成结果：
 
+```
 dist/
 ├── wildchat.css
 ├── wildchat.js
 ├── wildchat.min.css
 └── wildchat.min.js
+```
 
 查看本地文档(jekyll参考相关文档)：
 
@@ -55,6 +57,8 @@ jekyll build
 ```
 
 生成结果：
+
+```
 _site/
 ├── css
 │   ├── pygments-borland.css
@@ -63,6 +67,7 @@ _site/
 ...
 
 12 directories, 32 file
+```
 
 ## 下载
 
