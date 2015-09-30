@@ -151,7 +151,7 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 * [JavaScript SDK API](https://z.wilddog.com/web/api)
 * [下载页面](https://www.wilddog.com/download/)
 * [Wilddog FAQ](https://z.wilddog.com/faq/qa)
-* [jekyll 中文](http://jekyll.bootcss.com/docs/home/) 将纯文本转化为静态网站和博客
+* [jekyll 中文](http://jekyll.bootcss.com/docs/home/) 开源软件，功能是将纯文本转化为静态网站和博客
 * [jekyll 中文安装文档](http://jekyll.bootcss.com/docs/installation/)
 
 ## License
