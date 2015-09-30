@@ -43,7 +43,8 @@ dist/
 └── wildchat.min.js
 ```
 
-查看本地文档(jekyll参考相关文档)：
+## 生成本地文档
+**本地文档是用jekyll构建的，jekyll需要ruby环境的运行环境。如果没有ruby环境，可以查看上面的在线文档。**
 
 ```
 cd website/
