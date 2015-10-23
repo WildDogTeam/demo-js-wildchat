@@ -165,7 +165,7 @@ wildchatRef.authWithOAuthPopup('weibo' /* or 'qq', 'weixin' */, function(error, 
 
 #### 修改默认的UI
 
-Wildchat UI 默认使用 jQuery 和 Underscore.js 构建的，以及样式和 UI 元素组件使用 Bootstrap 构建。要更改，请参阅 `wildchat-default.js` 和 `styles.less` 修改用户界面的外观和体验。
+Wildchat UI 默认使用 jQuery 和 Underscore.js 构建的，以及样式和 UI 元素组件使用 Bootstrap 构建。要更改，请参阅 `wildchat.js` 和 `styles.less` 修改用户界面的外观和体验。
 
 当你准备好构建，只需从项目的根目录执行 `grunt`， 编译并生成结果到 dest 目录。
 
