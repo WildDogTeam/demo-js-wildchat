@@ -102,7 +102,7 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 <a name="authentication"> </a>
 ### 用户认证
 
-Wildchat 使用 Wilddog [身份验证](https://z.wilddog.com/web/guide/7)和[安全规则](https://z.wilddog.com/rule/quickstart)，无论是自己的自定义认证系统或一些内置的供应商认证都将给你巨大灵活性。
+Wildchat 使用 Wilddog [身份验证](https://z.wilddog.com/web/auth)和[安全规则](https://z.wilddog.com/rule/quickstart)，无论是自己的自定义认证系统或一些内置的供应商认证都将给你巨大灵活性。
 
 #### 整合自己的用户认证
 
@@ -125,11 +125,11 @@ wildchatRef.authWithCustomToken(<token>, function(error, authData) {
 });
 {% endhighlight %}
 
-欲了解更多信息，查看的文档[终端用户认证](https://z.wilddog.com/web/guide/7).
+欲了解更多信息，查看的文档[终端用户认证](https://z.wilddog.com/web/auth).
 
 #### Wilddog用户认证
 
-Wilddog 一些内置的供应商认证，包括[新浪微博](https://z.wilddog.com/android/guide/7), [微信](https://z.wilddog.com/android/guide/7), 或 [email / password](https://z.wilddog.com/android/guide/7) 。
+Wilddog 一些内置的供应商认证，包括[新浪微博](https://z.wilddog.com/android/auth), [微信](https://z.wilddog.com/android/auth), 或 [email / password](https://z.wilddog.com/android/auth) 。
 
 * 首先，在你的 Wilddog 账户里启用选择的供应商， `https://<YOUR-WILDDOG>.wilddogio.com`。社交登录服务，可能需要创建和配置应用程序和要求授权。
 
@@ -146,7 +146,7 @@ wildchatRef.authWithOAuthPopup('weibo' /* or 'qq', 'weixin' */, function(error, 
 });
 {% endhighlight %}
 
-欲了解更多信息，查看的文档[终端用户认证](https://z.wilddog.com/web/guide/7).
+欲了解更多信息，查看的文档[终端用户认证](https://z.wilddog.com/web/auth).
 
 
 <a name="customizing"> </a>
