@@ -157,10 +157,9 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 * [demo-ios-wildchat](https://github.com/WildDogTeam/demo-ios-wildchat) Wildchat iOS 版本
 * [Wilddog 概览](https://z.wilddog.com/overview/introduction)
 * [JavaScript SDK快速入门](https://z.wilddog.com/web/quickstart)
-* [JavaScript SDK 开发向导](https://z.wilddog.com/web/quickstart)
 * [JavaScript SDK API](https://z.wilddog.com/web/api)
 * [下载页面](https://www.wilddog.com/download/)
-* [Wilddog FAQ](https://z.wilddog.com/faq/qa)
+* [Wilddog FAQ](https://z.wilddog.com/questions)
 * [jekyll 中文](http://jekyll.bootcss.com/docs/home/) 开源软件，功能是将纯文本转化为静态网站和博客
 * [jekyll 中文安装文档](http://jekyll.bootcss.com/docs/installation/)
 
