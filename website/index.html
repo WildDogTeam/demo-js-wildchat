@@ -126,7 +126,11 @@
   </div>
 
   <!-- Wildchat -->
-  <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
+  <!--<script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>-->
+
+  <script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.0.0/wilddog-auth.js"></script>
+  <script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.0.0/wilddog-sync.js"></script>
+
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="libs/twitter-bootstrap/2.3.1/js/bootstrap-modal.min.js"></script>
 
@@ -134,7 +138,14 @@
   <link rel="stylesheet" href="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css" />
   <script src="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js"></script>
   <script>
-    var chatRef = new Wilddog('https://wildchat.wilddogio.com'),
+
+    var config = {
+      authDomain:"wildchat.wilddog.com",
+      syncURL: "https://wildchat.wilddogio.com"
+    };
+    wilddog.initializeApp(config);
+
+    var chatRef = wilddog.sync().ref(),
         target = document.getElementById("wildchat-container"),
         authModal = $('#auth-modal').modal({ show: false }),
         chat = new WildchatUI(chatRef, target);
@@ -144,10 +155,10 @@
       return false;
     });
 
-    chatRef.onAuth(function(authData) {
-      if (authData) {
-        var userId = authData.uid,
-            username = authData[authData.provider].username;
+    wilddog.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var userId = user.uid,
+                username = user.displayName;
 
         chat.setUser(userId, username);
         $('#user-name').text(username);
@@ -163,15 +174,25 @@
 
     function login(provider) {
       authModal.modal('hide');
-      chatRef.authWithOAuthPopup(provider, function(error, authData) {
-        if (error) {
-          console.log(error);
-        }
+      //固定为微博
+      if (provider == 'weibo'){
+          var provider = new wilddog.auth.WeiboAuthProvider();
+      }
+      wilddog.auth().signInWithPopup(provider).then(function (result) {
+      }).catch(function (error) {
+        console.log(error);
+        // ...
       });
     }
 
     function logout() {
-      chatRef.unauth();
+      wilddog.auth().signOut().then(function() {
+        // Sign-out successful.
+        console.log("sign-out")
+      }, function(error) {
+        // An error happened.
+        console.log("sign-out-error")
+      });
       location.reload();
     }
   </script>

@@ -7,7 +7,9 @@
     <script src='http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js'></script>
 
     <!-- Wilddog -->
-    <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
+    <!--<script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>-->
+    <script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.0.0/wilddog-sync.js"></script>
+    <script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.0.0/wilddog-auth.js"></script>
 
     <!-- Wildchat -->
     <link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css' />
@@ -36,16 +38,22 @@
   <body>
     <div id="wildchat-wrapper"></div>
     <script type="text/javascript">
-      var chatRef = new Wilddog("https://wildchat.wilddogio.com");
+      var config = {
+        authDomain:"wildchat.wilddog.com",
+        syncURL: "https://wildchat.wilddogio.com"
+      };
+      wilddog.initializeApp(config);
+
+      var chatRef = wilddog.sync().ref();
       var chat = new WildchatUI(chatRef, document.getElementById("wildchat-wrapper"));
-      chatRef.onAuth(function(authData) {
-        if (authData) {
-          chat.setUser(authData.uid, "Anonymous" + authData.uid.substr(10, 8));
+      wilddog.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          chat.setUser(user.uid, "Anonymous" + user.uid.substr(10, 8));
         } else {
-          chatRef.authAnonymously(function(error, authData) {
-            if (error) {
-              console.log(error);
-            }
+          wilddog.auth().signInAnonymously().then(function(res){
+            console.log(res);
+          }).catch(function (error) {
+            console.log(error);
           });
         }
       });
