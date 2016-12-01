@@ -115,7 +115,7 @@
     </div>
     <div class="modal-body text-center">
       <p>
-        <a id="twitter-signin" href="javascript:login('weibo');">
+        <a id="twitter-signin" href="javascript:login();">
           <img id="twitter-signin-btn" src="http://www.sinaimg.cn/blog/developer/wiki/32.png">
         </a>
       </p>
@@ -126,15 +126,21 @@
   </div>
 
   <!-- Wildchat -->
-  <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
+  <script src='https://cdn.wilddog.com/sdk/js/2.3.8/wilddog.js'></script>
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="libs/twitter-bootstrap/2.3.1/js/bootstrap-modal.min.js"></script>
 
   <!-- Download from https://github.com/WildDogTeam/demo-js-wildchat -->
-  <link rel="stylesheet" href="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css" />
-  <script src="https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js"></script>
+  <link rel="stylesheet" href="wildchat/0.5.0/wildchat.min.css" />
+  <script src="wildchat/0.5.0/wildchat.min.js"></script>
   <script>
-    var chatRef = new Wilddog('https://wildchat.wilddogio.com'),
+    var config = {
+      authDomain:'<appId>.wilddog.com',
+      syncURL:'https://<appId>.wilddogio.com'
+    }
+    wilddog.initializeApp(config);
+    var chatRef = wilddog.sync(),
+        chatAuth = wilddog.auth(),
         target = document.getElementById("wildchat-container"),
         authModal = $('#auth-modal').modal({ show: false }),
         chat = new WildchatUI(chatRef, target);
@@ -144,26 +150,27 @@
       return false;
     });
 
-    chatRef.onAuth(function(authData) {
-      if (authData) {
-        var userId = authData.uid,
-            username = authData[authData.provider].username;
+    chatAuth.onAuthStateChanged(function(user) {
+      if (user) {
+        var userId = user.uid,
+            username = user.displayName;
 
         chat.setUser(userId, username);
         $('#user-name').text(username);
         $('#user-info').show();
-        setTimeout(function() {
-          chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
-        }, 500);
+        // setTimeout(function() {
+        //   chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
+        // }, 500);
       } else {
         $('#user-info').hide();
-        chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
+        // chat._chat.enterRoom('-Iy1N3xs4kN8iALHV0QA')
       }
     });
 
-    function login(provider) {
+    function login() {
       authModal.modal('hide');
-      chatRef.authWithOAuthPopup(provider, function(error, authData) {
+      var weiboProvider = new wilddog.auth.WeiboAuthProvider();
+      chatAuth.signInWithPopup(weiboProvider, function(error, authData) {
         if (error) {
           console.log(error);
         }
@@ -171,7 +178,7 @@
     }
 
     function logout() {
-      chatRef.unauth();
+      chatAuth.signOut();
       location.reload();
     }
   </script>

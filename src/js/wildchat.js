@@ -6,12 +6,12 @@
 // entering, or leaving chat rooms, initiating chats, sending messages,
 // and moderator actions such as warning, kicking, or suspending users.
 // --------------
-(function(Wilddog) {
+(function() {
 
   // Establish a reference to the `window` object, and save the previous value
   // of the `Wildchat` variable.
   var root = this,
-      previousWildchat = root.Wildchat;
+    previousWildchat = root.Wildchat;
 
   function Wildchat(wilddogRef, options) {
 
@@ -37,11 +37,11 @@
     this._presenceBits = {};
 
     // Commonly-used Wilddog references.
-    this._userRef        = null;
-    this._messageRef     = this._wilddog.child('room-messages');
-    this._roomRef        = this._wilddog.child('room-metadata');
+    this._userRef = null;
+    this._messageRef = this._wilddog.child('room-messages');
+    this._roomRef = this._wilddog.child('room-metadata');
     this._privateRoomRef = this._wilddog.child('room-private-metadata');
-    this._moderatorsRef  = this._wilddog.child('moderators');
+    this._moderatorsRef = this._wilddog.child('moderators');
     this._suspensionsRef = this._wilddog.child('suspensions');
     this._usersOnlineRef = this._wilddog.child('user-names-online');
 
@@ -95,7 +95,7 @@
           // We're connected (or reconnected)! Set up our presence state.
           for (var i = 0; i < this._presenceBits; i++) {
             var op = this._presenceBits[i],
-                ref = this._wilddog.root().child(op.ref);
+              ref = this._wilddog.root().child(op.ref);
 
             ref.onDisconnect().set(op.offlineValue);
             ref.set(op.onlineValue);
@@ -143,7 +143,7 @@
     // Invoke each of the event handlers for a given event id with specified data.
     _invokeEventCallbacks: function(eventId) {
       var args = [],
-          callbacks = this._getEventCallbacks(eventId);
+        callbacks = this._getEventCallbacks(eventId);
 
       Array.prototype.push.apply(args, arguments);
       args = args.slice(1);
@@ -165,8 +165,7 @@
     },
 
     // Remove an on-disconnect event from firing upon future disconnect and reconnect.
-    _removePresenceOperation: function(path, value) {
-      var ref = new Wilddog(path);
+    _removePresenceOperation: function(ref, value) {
       ref.onDisconnect().cancel();
       ref.set(value);
       delete this._presenceBits[path];
@@ -214,7 +213,7 @@
     // Events to monitor chat invitations and invitation replies.
     _onWildchatInvite: function(snapshot) {
       var self = this,
-          invite = snapshot.val();
+        invite = snapshot.val();
 
       // Skip invites we've already responded to.
       if (invite.status) {
@@ -229,7 +228,7 @@
     },
     _onWildchatInviteResponse: function(snapshot) {
       var self = this,
-          invite = snapshot.val();
+        invite = snapshot.val();
 
       invite.id = invite.id || snapshot.key();
       this._invokeEventCallbacks('room-invite-response', invite);
@@ -243,8 +242,8 @@
   Wildchat.prototype.setUser = function(userId, userName, callback) {
     var self = this;
 
-    self._wilddog.onAuth(function(authData) {
-      if (authData) {
+    self._wilddog.app.auth().onAuthStateChanged(function(user) {
+      if (user) {
         self._userId = userId.toString();
         self._userName = userName.toString();
         self._userRef = self._wilddog.child('users').child(self._userId);
@@ -267,7 +266,7 @@
       for (var roomId in rooms) {
         this.enterRoom(rooms[roomId].id);
       }
-    }, /* onError */ function(){}, /* context */ this);
+    }, /* onError */ function() {}, /* context */ this);
   };
 
   // Callback registration. Supports each of the following events:
@@ -278,14 +277,14 @@
   // Create and automatically enter a new chat room.
   Wildchat.prototype.createRoom = function(roomName, roomType, callback) {
     var self = this,
-        newRoomRef = this._roomRef.push();
+      newRoomRef = this._roomRef.push();
 
     var newRoom = {
       id: newRoomRef.key(),
       name: roomName,
       type: roomType || 'public',
       createdByUserId: this._userId,
-      createdAt: Wilddog.ServerValue.TIMESTAMP
+      createdAt: this._wilddog.ServerValue.TIMESTAMP
     };
 
     if (roomType === 'private') {
@@ -335,7 +334,10 @@
       }
 
       // Invoke our callbacks before we start listening for new messages.
-      self._onEnterRoom({ id: roomId, name: roomName });
+      self._onEnterRoom({
+        id: roomId,
+        name: roomName
+      });
 
       // Setup message listeners
       self._roomRef.child(roomId).once('value', function(snapshot) {
@@ -348,15 +350,15 @@
 
         self._messageRef.child(roomId).limitToLast(self._options.numMaxMessages).on('child_removed', function(snapshot) {
           self._onRemoveMessage(roomId, snapshot);
-        }, /* onCancel */ function(){}, /* context */ self);
-      }, /* onFailure */ function(){}, self);
+        }, /* onCancel */ function() {}, /* context */ self);
+      }, /* onFailure */ function() {}, self);
     });
   };
 
   // Leave a chat room.
   Wildchat.prototype.leaveRoom = function(roomId) {
     var self = this,
-        userRoomRef = self._wilddog.child('room-users').child(roomId);
+      userRoomRef = self._wilddog.child('room-users').child(roomId);
 
     // Remove listener for new messages to this room.
     self._messageRef.child(roomId).off();
@@ -365,7 +367,7 @@
       var presenceRef = userRoomRef.child(self._userId).child(self._sessionId);
 
       // Remove presence bit for the room and cancel on-disconnect removal.
-      self._removePresenceOperation(presenceRef.toString(), null);
+      self._removePresenceOperation(presenceRef, null);
 
       // Remove session bit for the room.
       self._userRef.child('rooms').child(roomId).remove();
@@ -379,14 +381,14 @@
 
   Wildchat.prototype.sendMessage = function(roomId, messageContent, messageType, cb) {
     var self = this,
-        message = {
-          userId: self._userId,
-          name: self._userName,
-          timestamp: Wilddog.ServerValue.TIMESTAMP,
-          message: messageContent,
-          type: messageType || 'default'
-        },
-        newMessageRef;
+      message = {
+        userId: self._userId,
+        name: self._userName,
+        timestamp: self._wilddog.ServerValue.TIMESTAMP,
+        message: messageContent,
+        type: messageType || 'default'
+      },
+      newMessageRef;
 
     if (!self._user) {
       self._onAuthRequired();
@@ -397,7 +399,7 @@
     }
 
     newMessageRef = self._messageRef.child(roomId).push();
-    newMessageRef.setWithPriority(message, Wilddog.ServerValue.TIMESTAMP, cb);
+    newMessageRef.setWithPriority(message, self._wilddog.ServerValue.TIMESTAMP, cb);
   };
 
   Wildchat.prototype.deleteMessage = function(roomId, messageId, cb) {
@@ -428,11 +430,11 @@
   // Send a moderator notification to a specific user.
   Wildchat.prototype.sendSuperuserNotification = function(userId, notificationType, data, cb) {
     var self = this,
-        userNotificationsRef = self._wilddog.child('users').child(userId).child('notifications');
+      userNotificationsRef = self._wilddog.child('users').child(userId).child('notifications');
 
     userNotificationsRef.push({
       fromUserId: self._userId,
-      timestamp: Wilddog.ServerValue.TIMESTAMP,
+      timestamp: self._wilddog.ServerValue.TIMESTAMP,
       notificationType: notificationType,
       data: data || {}
     }, cb);
@@ -448,7 +450,7 @@
   // Suspend a user by putting the user into read-only mode for a period.
   Wildchat.prototype.suspendUser = function(userId, timeLengthSeconds, cb) {
     var self = this,
-        suspendedUntil = new Date().getTime() + 1000*timeLengthSeconds;
+      suspendedUntil = new Date().getTime() + 1000 * timeLengthSeconds;
 
     self._suspensionsRef.child(userId).set(suspendedUntil, function(error) {
       if (error && cb) {
@@ -465,18 +467,18 @@
   // Invite a user to a specific chat room.
   Wildchat.prototype.inviteUser = function(userId, roomId) {
     var self = this,
-        sendInvite = function() {
-          var inviteRef = self._wilddog.child('users').child(userId).child('invites').push();
-          inviteRef.set({
-            id: inviteRef.key(),
-            fromUserId: self._userId,
-            fromUserName: self._userName,
-            roomId: roomId
-          });
+      sendInvite = function() {
+        var inviteRef = self._wilddog.child('users').child(userId).child('invites').push();
+        inviteRef.set({
+          id: inviteRef.key(),
+          fromUserId: self._userId,
+          fromUserName: self._userName,
+          roomId: roomId
+        });
 
-          // Handle listen unauth / failure in case we're kicked.
-          inviteRef.on('value', self._onWildchatInviteResponse, function(){}, self);
-        };
+        // Handle listen unauth / failure in case we're kicked.
+        inviteRef.on('value', self._onWildchatInviteResponse, function() {}, self);
+      };
 
     if (!self._user) {
       self._onAuthRequired();
@@ -516,10 +518,10 @@
 
   Wildchat.prototype.declineInvite = function(inviteId, cb) {
     var self = this,
-        updates = {
-          'status': 'declined',
-          'toUserName': self._userName
-        };
+      updates = {
+        'status': 'declined',
+        'toUserName': self._userName
+      };
 
     self._userRef.child('invites').child(inviteId).update(updates, cb);
   };
@@ -534,10 +536,10 @@
 
   Wildchat.prototype.getUsersByRoom = function() {
     var self = this,
-        roomId = arguments[0],
-        query = self._wilddog.child('room-users').child(roomId),
-        cb = arguments[arguments.length - 1],
-        limit = null;
+      roomId = arguments[0],
+      query = self._wilddog.child('room-users').child(roomId),
+      cb = arguments[arguments.length - 1],
+      limit = null;
 
     if (arguments.length > 2) {
       limit = arguments[1];
@@ -547,7 +549,7 @@
 
     query.once('value', function(snapshot) {
       var usernames = snapshot.val() || {},
-          usernamesUnique = {};
+        usernamesUnique = {};
 
       for (var username in usernames) {
         for (var session in usernames[username]) {
@@ -565,8 +567,8 @@
 
   Wildchat.prototype.getUsersByPrefix = function(prefix, startAt, endAt, limit, cb) {
     var self = this,
-        query = this._usersOnlineRef,
-        prefixLower = prefix.toLowerCase();
+      query = this._usersOnlineRef,
+      prefixLower = prefix.toLowerCase();
 
     if (startAt) {
       query = query.startAt(null, startAt);
@@ -580,11 +582,11 @@
 
     query.once('value', function(snapshot) {
       var usernames = snapshot.val() || {},
-          usernamesFiltered = {};
+        usernamesFiltered = {};
 
       for (var userNameKey in usernames) {
         var sessions = usernames[userNameKey],
-            userName, userId, usernameClean;
+          userName, userId, usernameClean;
 
         // Grab the user data from the first registered active session.
         for (var sessionId in sessions) {
@@ -614,6 +616,7 @@
   // Miscellaneous helper methods.
   Wildchat.prototype.getRoom = function(roomId, callback) {
     this._roomRef.child(roomId).once('value', function(snapshot) {
+      console.log(snapshot.val());
       callback(snapshot.val());
     });
   };
@@ -632,4 +635,4 @@
       }
     }
   };
-})(Wilddog);
+})();
