@@ -84,8 +84,8 @@ Wildchat 工作原理简单，前提是在你的应用程序正确的依赖它�
 <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
 
 <!-- Wildchat -->
-<link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css' />
-<script src='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js'></script>
+<link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.css' />
+<script src='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.js'></script>
 ```
 
 使用上面提到的URL可以从Wilddog的CDN上下载到Wildchat的精简版和非精简版。你也可以从Wilddog的Github中下载他们。当然啦，Wilddog可以在官网上下载。
@@ -107,34 +107,36 @@ $ bower install wildchat --save
 ```HTML
 <script>
 // Create a new Wilddog reference, and a new instance of the Login client
-var chatRef = new Wilddog('https://<YOUR-WILDDOG>.wilddogio.com/chat');
+var config = {
+  authDomain: "<appId>.wilddog.com",
+  syncURL: "https://<appId>.wilddogio.com",
+};
+wilddog.initializeApp(config);
+
+var chatRef = wilddog.sync();
+var auth = wilddog.auth();
+var weiboProvider = new wilddog.auth.WeiboAuthProvider();
 
 function login() {
-  chatRef.authWithOAuthPopup("weibo", function(error, authData) {
-    if (error) {
-      console.log(error);
-    }
+  wilddog.auth().signInWithPopup(weiboProvider).then(function (user) {
+    //  一旦通过验证，Wildchat实例携带我们的用户ID和用户名
+    initChat(user);
+  }).catch(function (error) {
+     console.log(error);
   });
 }
-
-chatRef.onAuth(function(authData) {
-  //  一旦通过验证，Wildchat实例携带我们的用户ID和用户名
-  if (authData) {
-    initChat(authData);
-  }
-});
 </script>
 
 <a href='#' onclick='login();'>登录微博</a>
 ```
-    
+
 - 初始化一个聊天。
 
 ```HTML
 <script>
 function initChat(authData) {
   var chat = new WildchatUI(chatRef, document.getElementById('wildchat-wrapper'));
-  chat.setUser(authData.uid, authData[authData.provider].displayName);
+  chat.setUser(authData.uid, authData.displayName);
 }
 </script>
 
@@ -175,4 +177,3 @@ Open Source:
 
 * [firechat](https://github.com/firebase/firechat) Real-time Chat powered by Firebas
 * [JQuery](http://jquery.com) The Write Less, Do More, JavaScript Library
-

@@ -21,11 +21,11 @@ Wildchat 工作原理简单，前提是在你的应用程序正确的依赖它�
 <script src='http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js'></script>
 
 <!-- Wilddog -->
-<script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
+<script src='https://cdn.wilddog.com/sdk/js/2.3.9/wilddog.js'></script>
 
 <!-- Wildchat -->
-<link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css' />
-<script src='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js'></script>
+<link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.css' />
+<script src='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.js'></script>
 {% endhighlight %}
 
 使用上面的网址可以下载两个压缩的和非压缩版本的 Wildchat 的 JavaScript 和 CSS 文件。您也可以从
@@ -57,7 +57,7 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 让开始吧，在我们的例子中使用新浪微博的身份认证：
 
 {% highlight html %}
-<!doctype html>	
+<!doctype html>
 <html>
   <head>
     <meta charset='utf-8' />
@@ -69,25 +69,28 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
     <script src='https://cdn.wilddog.com/js/client/current/wilddog.js'></script>
 
     <!-- Wildchat -->
-    <link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.css' />
-    <script src='https://cdn.wilddog.com/app/wildchat/0.5.0/wildchat.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.css' />
+    <script src='https://cdn.wilddog.com/app/wildchat/0.6.0/wildchat.min.js'></script>
   </head>
   <body>
     <script type='text/javascript'>
       // Create a new Wilddog reference, and a new instance of the Login client
-      var chatRef = new Wilddog('https://<YOUR-WILDDOG>.wilddogio.com/chat');
-      chatRef.onAuth(function(authData) {
-        // 一旦通过验证，Wildchat实例携带我们的用户ID和用户名
-        if (authData) {
-          var chat = new WildchatUI(chatRef, document.getElementById('wildchat-wrapper'));
-          chat.setUser(authData.uid, authData[authData.provider].displayName);
-        }
-      });
-      function login(provider) {
-        chatRef.authWithOAuthPopup(provider, function(error, authData) {
-          if (error) {
-            console.log(error);
-          }
+      var config = {
+        authDomain: "<appId>.wilddog.com",
+        syncURL: "https://<appId>.wilddogio.com",
+      };
+      wilddog.initializeApp(config);
+
+      var chatRef = wilddog.sync();
+      var auth = wilddog.auth();
+      var weiboProvider = new wilddog.auth.WeiboAuthProvider();
+
+      function login() {
+        wilddog.auth().signInWithPopup(weiboProvider).then(function (user) {
+          //  一旦通过验证，Wildchat实例携带我们的用户ID和用户名
+          initChat(user);
+        }).catch(function (error) {
+           console.log(error);
         });
       }
     </script>
@@ -117,8 +120,8 @@ Wilddog 提供生成 token 的库，其中包括：[Java](https://github.com/Wil
 生成 JWT 后，认证用户：
 
 {% highlight javascript %}
-var wildchatRef = new Wilddog('https://<YOUR-WILDDOG>.wilddogio.com');
-wildchatRef.authWithCustomToken(<token>, function(error, authData) {
+var auth = wilddog.auth();
+auth.authWithCustomToken(<token>, function(error, authData) {
   if (error) {
     console.log(error);
   }
@@ -136,10 +139,11 @@ Wilddog 一些内置的供应商认证，包括[新浪微博](https://z.wilddog.
 * 然后，使用 authWithOAuthPopup 登录：
 
 {% highlight javascript %}
-var wildchatRef = new Wilddog('https://<YOUR-WILDDOG>.wilddogio.com');
-wildchatRef.onAuth(function(authData) { ... });
+var auth = wilddog.auth();
+var provider = new wilddog.auth.WeiboAuthProvider();
+auth.onAuthStateChanged(function(user) { ... });
 ...
-wildchatRef.authWithOAuthPopup('weibo' /* or 'qq', 'weixin' */, function(error, authData) {
+auth.authWithOAuthPopup(provider, function(error, user) {
   if (error) {
     console.log(error);
   }
