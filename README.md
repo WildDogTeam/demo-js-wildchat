@@ -51,6 +51,19 @@ dist/
 cd website/
 jekyll s
 ```
+如果遇到
+```
+Dependency Error: Yikes! It looks like you don't have pygments or one of its dependencies installed. In order to use Jekyll as currently configured, you'll need to install this gem. The full error message from Ruby is: 'cannot load such file -- pygments' If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
+  Liquid Exception: pygments in docs/index.md
+             ERROR: YOUR SITE COULD NOT BE BUILT:
+                    ------------------------------------
+                    pygments
+
+```
+请执行
+```bash
+gem install pygments.rb  --source http://rubygems.org
+```
 
 生成web部署文件：
 
@@ -127,7 +140,7 @@ function login() {
 }
 </script>
 
-<a href='#' onclick='login();'>登录微博</a>
+<button onclick='login();'>登录微博</button>
 ```
 
 - 初始化一个聊天。

@@ -2,13 +2,15 @@
 layout: docs
 ---
 
-<a name="overview"> </a>
+<!-- <a name="overview"> </a> -->
+
 ### 概述
 
 Wildchat 是一个简单，使用 [Wilddog](https://www.wilddog.com/) 构建的聊天 widget。
 它的目的是作为一个简洁的，建立在 Wilddog 基础上面向文档的聊天产品。它的工作原理简单，并很容易扩展。
 
-<a name="getting_started"> </a>
+<!-- <a name="getting_started"> </a> -->
+
 ### 入门
 
 Wildchat 工作原理简单，前提是在你的应用程序正确的依赖它，并配置 Wilddog 帐户系统。
@@ -52,7 +54,7 @@ Wildchat 需要 Wilddog 来同步和存储数据。您可以在这里[注册](ht
 
 #### 例子
 
-*** Wildchat 需要经过身份认证的 Wilddog 引用***。 Wilddog 支持自定义认证系统或一些内置的供应商认证（详见下文）。
+*Wildchat 需要经过身份认证的 Wilddog 引用* 。Wilddog 支持自定义认证系统或一些内置的供应商认证（详见下文）。
 
 让开始吧，在我们的例子中使用新浪微博的身份认证：
 
